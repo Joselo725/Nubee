@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', serif; /* Cambia la fuente a Times New Roman */
     background-color: #000; /* Fondo negro */
     color: white; /* Texto en blanco */
     margin: 0;
