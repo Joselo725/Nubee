@@ -13,22 +13,33 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
     margin-bottom: 20px;
+    position: relative; /* Para que los logos se posicionen dentro de la cabecera */
 }
 
 .logo {
     width: 50px;
+    position: absolute;
+}
+
+.left-logo {
+    left: 0; /* Coloca el logo a la izquierda */
+    top: 0;
+}
+
+.right-logo {
+    right: 0; /* Coloca el logo a la derecha */
+    top: 0;
 }
 
 h1 {
-    text-align: center;
     margin: 0;
+    text-align: center;
 }
 
 input {
@@ -65,6 +76,7 @@ button {
     margin: 5px;
     background-color: #4CAF50;
     color: white;
+    border-radius: 3px;
 }
 
 .filter-button.personal {
