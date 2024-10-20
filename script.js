@@ -7,13 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let tasks = []; // Array para almacenar las tareas
 
+    // Añadir nueva tarea
     addTaskButton.addEventListener('click', () => {
         const taskText = taskInput.value.trim();
         if (taskText) {
             const task = {
                 text: taskText,
                 completed: false,
-                personal: false // Puedes establecer esta propiedad según sea necesario
+                personal: false // Nueva propiedad para las tareas personales
             };
             tasks.push(task); // Agregar tarea al array
             renderTasks(); // Renderizar las tareas
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.textContent = task.text;
                 if (task.completed) li.classList.add('completed');
 
+                // Botón para marcar como completado
                 const completedButton = document.createElement('button');
                 completedButton.textContent = task.completed ? 'Desmarcar' : 'Completar';
                 completedButton.addEventListener('click', () => {
@@ -42,14 +44,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     renderTasks(); // Volver a renderizar tareas
                 });
 
+                // Botón para marcar como personal
+                const personalButton = document.createElement('button');
+                personalButton.textContent = task.personal ? 'No personal' : 'Personal';
+                personalButton.classList.add('personal'); // Aplicar clase personal
+                personalButton.addEventListener('click', () => {
+                    task.personal = !task.personal; // Cambiar estado de personal
+                    renderTasks(); // Volver a renderizar tareas
+                });
+
+                // Botón para eliminar tarea
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Eliminar';
+                deleteButton.classList.add('delete'); // Aplicar clase delete
                 deleteButton.addEventListener('click', () => {
                     tasks.splice(index, 1); // Eliminar tarea del array
                     renderTasks(); // Volver a renderizar tareas
                 });
 
                 li.appendChild(completedButton);
+                li.appendChild(personalButton); // Agregar botón personal
                 li.appendChild(deleteButton);
                 taskList.appendChild(li);
             }
@@ -64,6 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Actualizar el conteo de tareas
     function updateTaskCount() {
-        taskCount.textContent = `Total de Tareas: ${tasks.length}`;
+        taskCount.textContent = 'Total de Tareas: ' + tasks.length;
     }
 });

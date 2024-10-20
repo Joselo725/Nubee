@@ -71,20 +71,40 @@ ul {
 li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px;
     border-bottom: 1px solid #555;
 }
 
 li button {
-    background: red;
+    background: #4CAF50;
     color: white;
     border: none;
     padding: 5px 10px;
+    margin-left: 5px;
     cursor: pointer;
+    border-radius: 3px;
+    transition: background 0.3s;
 }
 
 li button:hover {
-    background: darkred;
+    background: #45a049; /* Cambia a un verde más oscuro al pasar el ratón */
+}
+
+li button.delete {
+    background: red; /* Color rojo para el botón de eliminar */
+}
+
+li button.delete:hover {
+    background: darkred; /* Rojo más oscuro al pasar el ratón */
+}
+
+li button.personal {
+    background: orange; /* Color naranja para las tareas personales */
+}
+
+li button.personal:hover {
+    background: darkorange; /* Naranja más oscuro al pasar el ratón */
 }
 
 .completed {
