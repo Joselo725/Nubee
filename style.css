@@ -19,7 +19,6 @@ body {
     display: flex;
     justify-content: space-between; /* Espacio entre los logos y el título */
     align-items: center; /* Centrado vertical */
-    margin-bottom: 20px;
 }
 
 .logo {
