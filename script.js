@@ -37,56 +37,62 @@ document.addEventListener('DOMContentLoaded', () => {
         taskList.innerHTML = '';
 
         tasks.forEach((task, index) => {
-            const li = document.createElement('li');
-            li.textContent = task.text;
+            if (filter === 'all' || 
+                (filter === 'completed' && task.completed) || 
+                (filter === 'pending' && !task.completed) || 
+                (filter === 'personal' && task.personal)) {
 
-            // Etiqueta de estado
-            const statusLabel = document.createElement('div');
-            statusLabel.classList.add('status-label');
-            if (task.completed) {
-                statusLabel.textContent = 'Completada';
-                statusLabel.classList.add('completed');
-                li.classList.add('completed');
-            } else if (task.personal) {
-                statusLabel.textContent = 'Personal';
-                statusLabel.classList.add('personal');
-            } else {
-                statusLabel.textContent = 'Pendiente';
-                statusLabel.classList.add('pending');
+                const li = document.createElement('li');
+                li.textContent = task.text;
+
+                // Etiqueta de estado
+                const statusLabel = document.createElement('div');
+                statusLabel.classList.add('status-label');
+                if (task.completed) {
+                    statusLabel.textContent = 'Completada';
+                    statusLabel.classList.add('completed');
+                    li.classList.add('completed');
+                } else if (task.personal) {
+                    statusLabel.textContent = 'Personal';
+                    statusLabel.classList.add('personal');
+                } else {
+                    statusLabel.textContent = 'Pendiente';
+                    statusLabel.classList.add('pending');
+                }
+
+                li.appendChild(statusLabel);
+
+                // Botón para marcar como completado
+                const completedButton = document.createElement('button');
+                completedButton.textContent = task.completed ? 'Desmarcar' : 'Completar';
+                completedButton.addEventListener('click', () => {
+                    task.completed = !task.completed;
+                    renderTasks(filter);
+                });
+
+                // Botón para marcar como personal
+                const personalButton = document.createElement('button');
+                personalButton.textContent = task.personal ? 'No personal' : 'Personal';
+                personalButton.classList.add('personal');
+                personalButton.addEventListener('click', () => {
+                    task.personal = !task.personal;
+                    renderTasks(filter);
+                });
+
+                // Botón para eliminar tarea
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.classList.add('delete');
+                deleteButton.addEventListener('click', () => {
+                    tasks.splice(index, 1);
+                    renderTasks(filter);
+                });
+
+                li.appendChild(completedButton);
+                li.appendChild(personalButton);
+                li.appendChild(deleteButton);
+                taskList.appendChild(li);
             }
-            
-            li.appendChild(statusLabel);
-
-            // Botón para marcar como completado
-            const completedButton = document.createElement('button');
-            completedButton.textContent = task.completed ? 'Desmarcar' : 'Completar';
-            completedButton.addEventListener('click', () => {
-                task.completed = !task.completed;
-                renderTasks(filter);
-            });
-
-            // Botón para marcar como personal
-            const personalButton = document.createElement('button');
-            personalButton.textContent = task.personal ? 'No personal' : 'Personal';
-            personalButton.classList.add('personal');
-            personalButton.addEventListener('click', () => {
-                task.personal = !task.personal;
-                renderTasks(filter);
-            });
-
-            // Botón para eliminar tarea
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Eliminar';
-            deleteButton.classList.add('delete');
-            deleteButton.addEventListener('click', () => {
-                tasks.splice(index, 1);
-                renderTasks(filter);
-            });
-
-            li.appendChild(completedButton);
-            li.appendChild(personalButton);
-            li.appendChild(deleteButton);
-            taskList.appendChild(li);
         });
 
         updateTaskCount();
