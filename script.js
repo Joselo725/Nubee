@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addTaskButton = document.getElementById('addTaskButton');
     const taskList = document.getElementById('taskList');
     const taskCount = document.getElementById('taskCount');
-    const buttons = document.querySelectorAll('.filter-button'); // Botones para filtrar
+    const buttons = document.querySelectorAll('.filter-button');
 
-    let tasks = []; // Array para almacenar las tareas
+    let tasks = [];
 
     // Añadir nueva tarea
     addTaskButton.addEventListener('click', () => {
@@ -14,71 +14,82 @@ document.addEventListener('DOMContentLoaded', () => {
             const task = {
                 text: taskText,
                 completed: false,
-                personal: false // Nueva propiedad para las tareas personales
+                personal: false
             };
-            tasks.push(task); // Agregar tarea al array
-            renderTasks(); // Renderizar las tareas
-            taskInput.value = ''; // Limpiar el campo de entrada
+            tasks.push(task);
+            renderTasks();
+            taskInput.value = '';
         } else {
             alert('Por favor, ingrese una tarea.');
         }
     });
 
-    // Manejar filtro de tareas según el botón
+    // Manejar filtro de tareas
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const filter = button.getAttribute('data-filter');
-            renderTasks(filter); // Renderizar tareas según el filtro
+            renderTasks(filter);
         });
     });
 
     // Renderizar tareas
     function renderTasks(filter = 'all') {
-        taskList.innerHTML = ''; // Limpiar la lista
+        taskList.innerHTML = '';
+
         tasks.forEach((task, index) => {
-            if (
-                filter === 'all' || 
-                (filter === 'completed' && task.completed) || 
-                (filter === 'pending' && !task.completed) || 
-                (filter === 'personal' && task.personal)
-            ) {
-                const li = document.createElement('li');
-                li.textContent = task.text;
-                if (task.completed) li.classList.add('completed');
+            const li = document.createElement('li');
+            li.textContent = task.text;
 
-                // Botón para marcar como completado
-                const completedButton = document.createElement('button');
-                completedButton.textContent = task.completed ? 'Desmarcar' : 'Completar';
-                completedButton.addEventListener('click', () => {
-                    task.completed = !task.completed; // Cambiar estado de completado
-                    renderTasks(filter); // Volver a renderizar tareas
-                });
-
-                // Botón para marcar como personal
-                const personalButton = document.createElement('button');
-                personalButton.textContent = task.personal ? 'No personal' : 'Personal';
-                personalButton.classList.add('personal'); // Aplicar clase personal
-                personalButton.addEventListener('click', () => {
-                    task.personal = !task.personal; // Cambiar estado de personal
-                    renderTasks(filter); // Volver a renderizar tareas
-                });
-
-                // Botón para eliminar tarea
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Eliminar';
-                deleteButton.classList.add('delete'); // Aplicar clase delete
-                deleteButton.addEventListener('click', () => {
-                    tasks.splice(index, 1); // Eliminar tarea del array
-                    renderTasks(filter); // Volver a renderizar tareas
-                });
-
-                li.appendChild(completedButton);
-                li.appendChild(personalButton); // Agregar botón personal
-                li.appendChild(deleteButton);
-                taskList.appendChild(li);
+            // Etiqueta de estado
+            const statusLabel = document.createElement('div');
+            statusLabel.classList.add('status-label');
+            if (task.completed) {
+                statusLabel.textContent = 'Completada';
+                statusLabel.classList.add('completed');
+                li.classList.add('completed');
+            } else if (task.personal) {
+                statusLabel.textContent = 'Personal';
+                statusLabel.classList.add('personal');
+            } else {
+                statusLabel.textContent = 'Pendiente';
+                statusLabel.classList.add('pending');
             }
+            
+            li.appendChild(statusLabel);
+
+            // Botón para marcar como completado
+            const completedButton = document.createElement('button');
+            completedButton.textContent = task.completed ? 'Desmarcar' : 'Completar';
+            completedButton.addEventListener('click', () => {
+                task.completed = !task.completed;
+                renderTasks(filter);
+            });
+
+            // Botón para marcar como personal
+            const personalButton = document.createElement('button');
+            personalButton.textContent = task.personal ? 'No personal' : 'Personal';
+            personalButton.classList.add('personal');
+            personalButton.addEventListener('click', () => {
+                task.personal = !task.personal;
+                renderTasks(filter);
+            });
+
+            // Botón para eliminar tarea
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Eliminar';
+            deleteButton.classList.add('delete');
+            deleteButton.addEventListener('click', () => {
+                tasks.splice(index, 1);
+                renderTasks(filter);
+            });
+
+            li.appendChild(completedButton);
+            li.appendChild(personalButton);
+            li.appendChild(deleteButton);
+            taskList.appendChild(li);
         });
-        updateTaskCount(); // Actualizar el conteo de tareas
+
+        updateTaskCount();
     }
 
     // Actualizar el conteo de tareas

@@ -6,33 +6,32 @@
     <link rel="stylesheet" href="styles.css">
     <title>Gestor de Tareas</title>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
-            <img src="Logo198.png" alt="Logo Izquierda" class="logo left-logo"> <!-- Logo izquierdo -->
+            <img src="Logo198.png" alt="Logo Izquierda" class="logo left-logo">
             <h1>Gestor de Tareas</h1>
-            <img src="logo512.png" alt="Logo Derecha" class="logo right-logo"> <!-- Logo derecho -->
-        </div>
-
-        <!-- Entrada para nueva tarea -->
-        <input type="text" id="taskInput" placeholder="Agregar nueva tarea">
-        <button id="addTaskButton">Agregar Tarea</button>
-
-        <!-- Botones para asignar tipo de tarea -->
-        <div class="task-buttons">
-            <button id="allTasks" class="filter-button">Todas</button>
-            <button id="personalTasks" class="filter-button">Personales</button>
-            <button id="pendingTasks" class="filter-button">Pendientes</button>
-            <button id="completedTasks" class="filter-button">Completadas</button>
+            <img src="Logo512.png" alt="Logo Derecha" class="logo right-logo">
         </div>
 
         <div class="task-info">
             <p id="taskCount">Total de Tareas: 0</p>
         </div>
 
-        <!-- Lista de tareas -->
+        <input type="text" id="taskInput" placeholder="Agregar nueva tarea">
+        <button id="addTaskButton">Agregar Tarea</button>
+
+        <div class="task-buttons">
+            <button class="filter-button personal" data-filter="personal">Personales</button>
+            <button class="filter-button pending" data-filter="pending">Pendientes</button>
+            <button class="filter-button completed" data-filter="completed">Completadas</button>
+            <button class="filter-button" data-filter="all">Todas</button>
+        </div>
+
         <ul id="taskList"></ul>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
