@@ -1,15 +1,15 @@
 body {
-    font-family: 'Times New Roman', serif; /* Cambia la fuente a Times New Roman */
-    background-color: #000; /* Fondo negro */
-    color: white; /* Texto en blanco */
+    font-family: 'Times New Roman', serif;
+    background-color: #000;
+    color: white;
     margin: 0;
     padding: 20px;
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px;
     margin: auto;
-    background: #1c1c1c; /* Fondo de la aplicación */
+    background: #1c1c1c;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -23,17 +23,12 @@ body {
 }
 
 .logo {
-    width: 50px; /* Ajusta el tamaño del logo */
+    width: 50px;
 }
 
 h1 {
-    margin: 0;
     text-align: center;
-    flex-grow: 1; /* Permite que el título se centre */
-}
-
-.task-info {
-    text-align: center; /* Centra el texto de información de tareas */
+    margin: 0;
 }
 
 input {
@@ -46,21 +41,42 @@ input {
 
 button {
     padding: 10px 15px;
-    background-color: #4CAF50; /* Color verde */
-    color: white;
     border: none;
     border-radius: 3px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #45a049; /* Color verde más oscuro al pasar el ratón */
+#addTaskButton {
+    background-color: #4CAF50;
+    color: white;
 }
 
-select {
+#addTaskButton:hover {
+    background-color: #45a049;
+}
+
+.task-buttons {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.filter-button {
     padding: 10px;
-    margin: 10px 0;
-    width: 100%; /* Ancho completo para el selector */
+    margin: 5px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.filter-button.personal {
+    background-color: orange;
+}
+
+.filter-button.pending {
+    background-color: blue;
+}
+
+.filter-button.completed {
+    background-color: red;
 }
 
 ul {
@@ -71,43 +87,11 @@ ul {
 li {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 10px;
     border-bottom: 1px solid #555;
 }
 
-li button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin-left: 5px;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: background 0.3s;
-}
-
-li button:hover {
-    background: #45a049; /* Cambia a un verde más oscuro al pasar el ratón */
-}
-
-li button.delete {
-    background: red; /* Color rojo para el botón de eliminar */
-}
-
-li button.delete:hover {
-    background: darkred; /* Rojo más oscuro al pasar el ratón */
-}
-
-li button.personal {
-    background: orange; /* Color naranja para las tareas personales */
-}
-
-li button.personal:hover {
-    background: darkorange; /* Naranja más oscuro al pasar el ratón */
-}
-
 .completed {
-    text-decoration: line-through; /* Tachar tareas completadas */
-    color: #999; /* Cambiar el color a gris */
+    text-decoration: line-through;
+    color: #999;
 }
