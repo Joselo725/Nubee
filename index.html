@@ -9,21 +9,21 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="Logo198.png" alt="Logo Izquierda" class="logo left-logo"> <!-- Logo izquierdo -->
-            <h1>Gestor de Tareas</h1> <!-- Título centrado -->
-            <img src="Logo512.png" alt="Logo Derecha" class="logo right-logo"> <!-- Logo derecho -->
+            <img src="images/Logo198.png" alt="Logo Izquierda" class="logo left-logo"> <!-- Logo izquierdo -->
+            <h1>Gestor de Tareas</h1>
+            <img src="images/Logo512.png" alt="Logo Derecha" class="logo right-logo"> <!-- Logo derecho -->
         </div>
         <div class="task-info">
             <p id="taskCount">Total de Tareas: 0</p>
         </div>
         <input type="text" id="taskInput" placeholder="Agregar nueva tarea">
-        <div class="task-buttons">
-            <button id="addTaskButton">Agregar Tarea</button>
-            <button id="showAllButton">Todas</button>
-            <button id="showCompletedButton">Completadas</button>
-            <button id="showPendingButton">Pendientes</button>
-            <button id="showPersonalButton">Personales</button>
-        </div>
+        <button id="addTaskButton">Agregar Tarea</button>
+        <select id="filterTasks">
+            <option value="all">Todas</option>
+            <option value="completed">Completadas</option>
+            <option value="pending">Pendientes</option>
+            <option value="personal">Personales</option>
+        </select>
         <ul id="taskList"></ul>
     </div>
     <script src="script.js"></script>

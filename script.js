@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('taskInput');
     const addTaskButton = document.getElementById('addTaskButton');
     const taskList = document.getElementById('taskList');
+    const filterTasks = document.getElementById('filterTasks');
     const taskCount = document.getElementById('taskCount');
 
     let tasks = []; // Array para almacenar las tareas
@@ -24,13 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Renderizar tareas
-    function renderTasks(filter = 'all') {
+    function renderTasks() {
         taskList.innerHTML = ''; // Limpiar la lista
         tasks.forEach((task, index) => {
-            if (filter === 'all' || 
-               (filter === 'completed' && task.completed) || 
-               (filter === 'pending' && !task.completed) ||
-               (filter === 'personal' && task.personal)) {
+            if (filterTasks.value === 'all' || 
+               (filterTasks.value === 'completed' && task.completed) || 
+               (filterTasks.value === 'pending' && !task.completed) ||
+               (filterTasks.value === 'personal' && task.personal)) {
                 const li = document.createElement('li');
                 li.textContent = task.text;
                 if (task.completed) li.classList.add('completed');
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 completedButton.textContent = task.completed ? 'Desmarcar' : 'Completar';
                 completedButton.addEventListener('click', () => {
                     task.completed = !task.completed; // Cambiar estado de completado
-                    renderTasks(filter); // Volver a renderizar tareas
+                    renderTasks(); // Volver a renderizar tareas
                 });
 
                 // Botón para marcar como personal
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 personalButton.classList.add('personal'); // Aplicar clase personal
                 personalButton.addEventListener('click', () => {
                     task.personal = !task.personal; // Cambiar estado de personal
-                    renderTasks(filter); // Volver a renderizar tareas
+                    renderTasks(); // Volver a renderizar tareas
                 });
 
                 // Botón para eliminar tarea
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 deleteButton.classList.add('delete'); // Aplicar clase delete
                 deleteButton.addEventListener('click', () => {
                     tasks.splice(index, 1); // Eliminar tarea del array
-                    renderTasks(filter); // Volver a renderizar tareas
+                    renderTasks(); // Volver a renderizar tareas
                 });
 
                 li.appendChild(completedButton);
@@ -71,10 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Filtrar tareas
-    document.getElementById('showAllButton').addEventListener('click', () => renderTasks('all'));
-    document.getElementById('showCompletedButton').addEventListener('click', () => renderTasks('completed'));
-    document.getElementById('showPendingButton').addEventListener('click', () => renderTasks('pending'));
-    document.getElementById('showPersonalButton').addEventListener('click', () => renderTasks('personal'));
+    filterTasks.addEventListener('change', () => {
+        renderTasks(); // Volver a renderizar tareas al cambiar el filtro
+    });
 
     // Actualizar el conteo de tareas
     function updateTaskCount() {

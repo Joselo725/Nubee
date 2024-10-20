@@ -44,12 +44,6 @@ input {
     border-radius: 3px;
 }
 
-.task-buttons {
-    display: flex;
-    justify-content: space-between; /* Espacio entre los botones */
-    margin: 10px 0; /* Margen entre la entrada y los botones */
-}
-
 button {
     padding: 10px 15px;
     background-color: #4CAF50; /* Color verde */
@@ -61,6 +55,12 @@ button {
 
 button:hover {
     background-color: #45a049; /* Color verde más oscuro al pasar el ratón */
+}
+
+select {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%; /* Ancho completo para el selector */
 }
 
 ul {
